@@ -2,7 +2,7 @@
 
 let mongoose = require('mongoose');
 
-let urlDbNube = 'mongodb+srv://desarrollo:Desa.2o2o@docsware.erntoqz.mongodb.net/?retryWrites=true&w=majority';
+let urlDbNube = 'mongodb+srv://desarrollo:Desa.2o2o@detectplaca.gp58o0k.mongodb.net/?retryWrites=true&w=majority';
 
 let urlDbLocal = 'mongodb://localhost:27017/chat-interno';
 let app = require('./app');

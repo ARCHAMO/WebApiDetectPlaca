@@ -76,7 +76,7 @@ function findByAll(req, res) {
 
     CustomerModel.paginate({}, options, (error, result) => {
         if (error) {
-            res.status(500).send({ message: 'Error en la peticion' });
+            res.status(500).send({ message: 'Error en la peticion' + error });
         } else {
             if (!result) {
                 res.status(404).send({ message: 'No hay clientes registrados' });

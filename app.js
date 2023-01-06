@@ -8,6 +8,7 @@ let app = express();
 // Cargamos las rutas
 let userRouters = require('./routes/UserRouters');
 let customerRouters = require('./routes/CustomerRouters');
+let vehicleRouters = require('./routes/VehicleRouters');
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -24,6 +25,7 @@ app.use(function(req, res, next) {
 // Rutas base
 app.use('/api', userRouters);
 app.use('/api', customerRouters);
+app.use('/api', vehicleRouters);
 
 module.exports = app;
 
