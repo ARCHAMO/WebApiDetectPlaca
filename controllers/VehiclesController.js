@@ -178,6 +178,7 @@ function getImagen(req, res) {
 
 function processImagePlaca(req, res) {
     let image_path = "shared/img/pendientes/placa1.jpg";
+    // let image_path = "https://acnews.blob.core.windows.net/imgnews/extralarge/NAZ_9847095df1ce4cb787fef29f0caf45a2.jpg";
     let body = new FormData();
     body.append("upload", fs.createReadStream(image_path));
     // body.append('upload', base64Image);
