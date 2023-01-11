@@ -9,6 +9,8 @@ let app = express();
 let userRouters = require('./routes/UserRouters');
 let customerRouters = require('./routes/CustomerRouters');
 let vehicleRouters = require('./routes/VehicleRouters');
+let plateRouters = require('./routes/PlateRecognizerRouters');
+
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -26,6 +28,8 @@ app.use(function(req, res, next) {
 app.use('/api', userRouters);
 app.use('/api', customerRouters);
 app.use('/api', vehicleRouters);
+app.use('/api', plateRouters);
+
 
 module.exports = app;
 

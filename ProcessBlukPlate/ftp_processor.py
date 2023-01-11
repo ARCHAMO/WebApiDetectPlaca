@@ -255,6 +255,7 @@ def send_data(args):
     data = {
         "dataStr" : args
     }
+    print(args)
     
     headers = {
         "Content-Type": "application/x-www-form-urlencoded"

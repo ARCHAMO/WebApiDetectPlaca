@@ -1,6 +1,5 @@
 'use strict';
 
-let fs = require('fs');
 let PlateRecognizerModel = require('../models/PlateRecognizerModel');
 let Global = require('../shared/global');
 let VehicleRepo = require('../repository/VehicleRepository');
@@ -45,7 +44,7 @@ function create(req, res) {
     });
 }
 
-async function saveVehicles(results) {
+function saveVehicles(results) {
     for (let index = 0; index < results.length; index++) {
         const element = results[index];
         let vehicle = new VehicleModel();
@@ -53,7 +52,7 @@ async function saveVehicles(results) {
         vehicle.codeRegion = element.region.code;
         vehicle.score = element.score;
         vehicle.type = element.vehicle.type;
-        const result = await VehicleRepo.create(vehicle);
+        const response = VehicleRepo.create(vehicle);
     }
 }
 
