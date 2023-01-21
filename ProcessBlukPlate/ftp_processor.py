@@ -255,13 +255,9 @@ def send_data(args):
     data = {
         "dataStr" : args
     }
-    print(args)
+    # print(args)
     
-    headers = {
-        "Content-Type": "application/x-www-form-urlencoded"
-    }
-
-    response = requests.post("http://localhost:3977/api/plate-recognizer", data, headers=headers)
+    response = requests.post("http://localhost:3001/plateRecognizer", json=data)
 
     # Verifica que la solicitud haya sido exitosa
     if response.status_code == 200:
