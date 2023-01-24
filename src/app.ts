@@ -15,10 +15,10 @@ app.use(express.json());
 
 const port = process.env.PORT || 3001;
 
-app.use(plateRecognizerRoute);
-app.use(vehicleRoute);
-app.use(userRoute);
-app.use(customerRoute);
+app.use('/api', plateRecognizerRoute);
+app.use('/api', vehicleRoute);
+app.use('/api', userRoute);
+app.use('/api', customerRoute);
 
 dbInit().then();
 app.listen(port, () => console.log(`Listo por el puerto ${port}`));

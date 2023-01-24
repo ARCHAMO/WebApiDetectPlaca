@@ -70,11 +70,19 @@ const userLoginController = async (req: Request, res: Response) => {
     if (response === null) {
         res.status(200).send({ data: response, message: 'Usuario no existe' })
     } else {
-        const token = jwt.sign({ response }, process.env.TOKEN_SECRETKEY);
-        res.header('auth-token', token).status(200).send({
-            status: true,
-            data: response
-        });
+        if(loginUser.gethash === true) {
+            const token = jwt.sign({ response }, process.env.TOKEN_SECRETKEY);
+            res.status(200).send({
+                status: true,
+                data: token
+            });
+        } else {
+            res.status(200).send({
+                status: true,
+                data: response
+            });
+        }
+
 
         // bcrypt.compare(loginUser.password, response.password, function (err, check) {
         //     console.log(check);

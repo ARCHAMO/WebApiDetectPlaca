@@ -9,7 +9,11 @@ import { plateCreateService, plateFindByAllService, plateFindByIdService } from 
 const plateCreateController = async (req: Request, res: Response) => {
     const { body } = req;
     const response = await plateCreateService(JSON.parse(body.dataStr));
-    res.send({ data: response })
+    if(response !== null) {
+        res.send({ data: response, status: true, message: 'Lectura guadada correctamente' })
+    } else {
+        res.send({ data: response, status: false, message: 'No se encontraron datos' })
+    }
 }
 
 /**
@@ -21,7 +25,11 @@ const plateFindByIdController = async (req: Request, res: Response) => {
     const { params } = req;
     const id = params.id;
     const response = await plateFindByIdService(id);
-    res.send({ data: response })
+    if(response !== null) {
+        res.send({ data: response, status: true, message: '' })
+    } else {
+        res.send({ data: response, status: false, message: 'No se encontraron datos' })
+    }
 }
 
 /**
@@ -32,7 +40,11 @@ const plateFindByIdController = async (req: Request, res: Response) => {
 const plateFindByAllController = async (req: Request, res: Response) => {
     const { body } = req;
     const response = await plateFindByAllService(body);
-    res.send({ data: response })
+    if(response !== null) {
+        res.send({ data: response, status: true, message: '' })
+    } else {
+        res.send({ data: response, status: false, message: 'No se encontraron datos' })
+    }
 }
 
 export { plateCreateController, plateFindByIdController, plateFindByAllController }

@@ -9,7 +9,11 @@ import { Response, Request } from 'express'
 const vehicleCreateController = async (req: Request, res: Response) => {
     const { body } = req;
     const response = await vehicleCreateService(body);
-    res.send({ data: response })
+    if(response !== null) {
+        res.send({ data: response, status: true, message: 'Vehiculo creado correctamente' })
+    } else {
+        res.send({ data: response, status: false, message: 'No se encontraron datos' })
+    }
 }
 
 /**
@@ -21,7 +25,11 @@ const vehicleCreateController = async (req: Request, res: Response) => {
     const { params } = req;
     const id = params.id;
     const response = await vehicleFindByIdService(id);
-    res.send({ data: response })
+    if(response !== null) {
+        res.send({ data: response, status: true, message: '' })
+    } else {
+        res.send({ data: response, status: false, message: 'No se encontraron datos' })
+    }
 }
 
 /**
@@ -32,7 +40,11 @@ const vehicleCreateController = async (req: Request, res: Response) => {
 const vehicleFindByAllController = async (req: Request, res: Response) => {
     const { body } = req;
     const response = await vehicleFindByAllService(body);
-    res.send({ data: response })
+    if(response !== null) {
+        res.send({ data: response, status: true, message: '' })
+    } else {
+        res.send({ data: response, status: false, message: 'No se encontraron datos' })
+    }
 }
 
 export { vehicleCreateController, vehicleFindByIdController, vehicleFindByAllController }
