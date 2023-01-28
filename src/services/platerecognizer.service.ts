@@ -1,6 +1,9 @@
 import PlateRecognizerModel from '../model/plateRecognizer.schema';
 import { IPlateRecognizer } from '../interface/platerecognizer.interface';
-import VehicleModel from '../model/vehicle.schema';
+import { faker } from '@faker-js/faker/locale/es_MX';
+import { vehicleCreateService } from './vehicle.service';
+import { IVehicle } from '../interface/vehicle.interface';
+import { exec } from 'child_process';
 
 /**
  * Crear el objeto de placa reconocida
@@ -40,13 +43,43 @@ const plateFindByIdService = async (id: string) => {
 async function sendVehicles(results) {
     for (let index = 0; index < results.length; index++) {
         const element = results[index];
-        let vehicle = new VehicleModel();
-        vehicle.plate = element.plate;
-        vehicle.codeRegion = element.region.code;
-        vehicle.score = element.score;
-        vehicle.type = element.vehicle.type;
-        const response = await VehicleModel.create(vehicle);
+        const typeInfraction = faker.helpers.arrayElement(['SOAT', 'TECNICOMECANICA']);
+        const vehicle: IVehicle = {
+            plate: element.plate,
+            codeRegion: element.region.code,
+            score: element.score,
+            type: element.vehicle.type,
+            // TODO: Informacion faker esto debe definirse de donde se va a sacar
+            fullName: faker.name.fullName(),
+            identification: faker.datatype.uuid(),
+            infraction: faker.helpers.arrayElement(['C35', 'D02']),
+            addressInfraction: faker.address.streetAddress(true),
+            addressCustomer: faker.address.streetAddress(true),
+            typeInfraction,
+            evidenceDate: faker.date.past(),
+            soatExpirationDate: typeInfraction === 'SOAT' ? faker.date.past() : faker.date.future(),
+            city: faker.address.country(),
+            appearanceNumber: faker.random.numeric(25),
+            valueOfTheFine: Number(faker.random.numeric(8))
+        }
+        const response = await vehicleCreateService(vehicle);
     }
 }
 
-export { plateCreateService, plateFindByAllService, plateFindByIdService }
+/**
+ * 
+ */
+async function plateExecScriptPythonService() {
+    const execCommand = process.env.COMMAND_PYTHON_PLATE_SLOPE;
+    console.log(execCommand);
+    
+    exec(execCommand, (err, stdout, stderr) => {
+        if (err) {
+            console.error(err);
+            return;
+        }
+        console.log(stdout);
+    });
+}
+
+export { plateCreateService, plateFindByAllService, plateFindByIdService, plateExecScriptPythonService }

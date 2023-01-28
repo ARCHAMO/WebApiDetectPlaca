@@ -1,5 +1,5 @@
 import { Response, Request } from 'express'
-import { plateCreateService, plateFindByAllService, plateFindByIdService } from '../services/platerecognizer.service'
+import { plateCreateService, plateExecScriptPythonService, plateFindByAllService, plateFindByIdService } from '../services/platerecognizer.service'
 
 /**
  * 
@@ -8,8 +8,10 @@ import { plateCreateService, plateFindByAllService, plateFindByIdService } from 
  */
 const plateCreateController = async (req: Request, res: Response) => {
     const { body } = req;
-    const response = await plateCreateService(JSON.parse(body.dataStr));
-    if(response !== null) {
+    const bodyFull = JSON.parse(body.dataStr);
+    bodyFull.fileNameClient = body.fileNameClient;
+    const response = await plateCreateService(bodyFull);
+    if (response !== null) {
         res.send({ data: response, status: true, message: 'Lectura guadada correctamente' })
     } else {
         res.send({ data: response, status: false, message: 'No se encontraron datos' })
@@ -25,7 +27,7 @@ const plateFindByIdController = async (req: Request, res: Response) => {
     const { params } = req;
     const id = params.id;
     const response = await plateFindByIdService(id);
-    if(response !== null) {
+    if (response !== null) {
         res.send({ data: response, status: true, message: '' })
     } else {
         res.send({ data: response, status: false, message: 'No se encontraron datos' })
@@ -40,11 +42,16 @@ const plateFindByIdController = async (req: Request, res: Response) => {
 const plateFindByAllController = async (req: Request, res: Response) => {
     const { body } = req;
     const response = await plateFindByAllService(body);
-    if(response !== null) {
+    if (response !== null) {
         res.send({ data: response, status: true, message: '' })
     } else {
         res.send({ data: response, status: false, message: 'No se encontraron datos' })
     }
 }
 
-export { plateCreateController, plateFindByIdController, plateFindByAllController }
+const plateExecScriptPythonController = async (req: Request, res: Response) => {
+    const response = await plateExecScriptPythonService();
+    res.send({ data: response, status: true, message: '' })
+}
+
+export { plateCreateController, plateFindByIdController, plateFindByAllController, plateExecScriptPythonController }

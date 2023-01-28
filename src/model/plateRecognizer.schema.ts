@@ -21,7 +21,10 @@ const PlateRecognizerSchema = new Schema(
         },
         timestamp: {
             type: Date
-        }
+        },
+        fileNameClient: {
+            type: String
+        },
     },
     {
         timestamps: true

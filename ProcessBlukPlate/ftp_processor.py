@@ -145,7 +145,7 @@ def process_files(ftp_client, ftp_files, args):
                                       exit_on_error=False)
             results.append(api_res)
             dataStr = json.dumps(api_res)
-            send_data(dataStr)
+            send_data(dataStr, ftp_file)
             move_file(ftp_client, ftp_file)
 
         if track_processed(args):
@@ -251,13 +251,14 @@ def ftp_process(args):
     else:
         single_camera_processing(ftp, args)
 
-def send_data(args):
+def send_data(args, fileName):
     data = {
-        "dataStr" : args
+        "dataStr" : args,
+        "fileNameClient": fileName
     }
     # print(args)
     
-    response = requests.post("http://localhost:3001/plateRecognizer", json=data)
+    response = requests.post("http://localhost:3001/api/plateRecognizer", json=data)
 
     # Verifica que la solicitud haya sido exitosa
     if response.status_code == 200:

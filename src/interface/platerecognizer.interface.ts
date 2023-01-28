@@ -4,4 +4,5 @@ export interface IPlateRecognizer {
     filename: String,
     version: Number,
     camera_id: any,
+    fileNameClient: String
 }
