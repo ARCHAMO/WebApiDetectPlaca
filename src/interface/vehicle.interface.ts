@@ -1,3 +1,5 @@
+'use strict';
+
 export interface IVehicle {
     plate: String,
     codeRegion: String,
@@ -13,5 +15,8 @@ export interface IVehicle {
     soatExpirationDate: Date,
     city: String,
     appearanceNumber: String,
-    valueOfTheFine: Number
+    valueOfTheFine: Number,
+    plateRecognizerId: String,
+    datePlateImage: Date
+
 }

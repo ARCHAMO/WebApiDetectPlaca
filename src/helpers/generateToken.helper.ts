@@ -1,6 +1,7 @@
+'use strict';
+
 import { IUser } from '../interface/user.interface';
 import jwt from 'jsonwebtoken';
-
 
 const tokenSign = async (user: IUser) => {
     const secretToken = process.env.TOKEN_SECRETKEY || 'testSecret';

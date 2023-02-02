@@ -1,6 +1,5 @@
 import VehicleModel from '../model/vehicle.schema';
 import { IVehicle } from '../interface/vehicle.interface';
-import { faker } from '@faker-js/faker/locale/es_MX';
 
 /**
  * Crear el objeto vehiculo

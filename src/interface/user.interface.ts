@@ -1,3 +1,5 @@
+'use strict';
+
 export interface IUser {
     firstName: String;
     secondName: String;

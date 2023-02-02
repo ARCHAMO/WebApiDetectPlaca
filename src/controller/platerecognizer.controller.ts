@@ -1,5 +1,8 @@
+'use strict';
+
 import { Response, Request } from 'express'
 import { plateCreateService, plateExecScriptPythonService, plateFindByAllService, plateFindByIdService } from '../services/platerecognizer.service'
+import { stringToDateHelper } from "../helpers/date.helper";
 
 /**
  * 
@@ -10,6 +13,7 @@ const plateCreateController = async (req: Request, res: Response) => {
     const { body } = req;
     const bodyFull = JSON.parse(body.dataStr);
     bodyFull.fileNameClient = body.fileNameClient;
+    bodyFull.datePlateImage = await stringToDateHelper(bodyFull.fileNameClient);
     const response = await plateCreateService(bodyFull);
     if (response !== null) {
         res.send({ data: response, status: true, message: 'Lectura guadada correctamente' })

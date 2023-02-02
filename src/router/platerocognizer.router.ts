@@ -1,3 +1,5 @@
+'use strict';
+
 import { Router } from "express";
 import { plateCreateController, plateExecScriptPythonController, plateFindByAllController, plateFindByIdController } from "../controller/platerecognizer.controller";
 

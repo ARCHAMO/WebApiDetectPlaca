@@ -1,3 +1,5 @@
+'use strict';
+
 import { Router } from "express";
 import { customerCreateController, customerFindByAllController, customerFindByIdController } from "../controller/customer.controller";
 

@@ -1,3 +1,5 @@
+'use strict';
+
 export interface ILoginUser {
     email: String,
     password: String,

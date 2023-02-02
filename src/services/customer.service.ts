@@ -1,5 +1,9 @@
+'use strict';
+
+
 import CustomerModel from '../model/customer.schema';
 import { ICustomer } from '../interface/customer.interface';
+import { IObjParam } from '../interface/objParam.interface';
 
 /**
  * 
@@ -16,7 +20,7 @@ const customerCreateService = async (customer: ICustomer) => {
  * @param params 
  * @returns 
  */
-const customerFindByAllService = async (params: any) => {
+const customerFindByAllService = async (params: IObjParam) => {
     const response = await CustomerModel.find(params);
     return response;
 }

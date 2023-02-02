@@ -1,3 +1,5 @@
+'use strict';
+
 import bcrypt from 'bcrypt';
 
 /**
@@ -5,7 +7,7 @@ import bcrypt from 'bcrypt';
  * @param textPlain 
  * @returns 
  */
-const encrypt = async (textPlain) => { 
+const encrypt = async (textPlain: string) => { 
     const hash = await bcrypt.hash(textPlain, 10)
     return hash
 }
@@ -16,7 +18,7 @@ const encrypt = async (textPlain) => {
  * @param hashPassword 
  * @returns 
  */
-const compare = async (passwordPlain, hashPassword) => {
+const compare = async (passwordPlain: string, hashPassword: string) => {
     return await bcrypt.compare(passwordPlain, hashPassword)
 }
 

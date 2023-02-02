@@ -1,3 +1,5 @@
+'use strict';
+
 import { userCreateService, userFindByAllService, userFindByIdService, userLoginService } from '../services/user.service'
 import { Response, Request } from 'express'
 import { ILoginUser } from '../interface/loginUser.interface';
@@ -70,8 +72,8 @@ const userLoginController = async (req: Request, res: Response) => {
     if (response === null) {
         res.status(200).send({ data: response, message: 'Usuario no existe' })
     } else {
-        if(loginUser.gethash === true) {
-            const token = jwt.sign({ response }, process.env.TOKEN_SECRETKEY);
+        if (loginUser.gethash === true) {
+            const token = jwt.sign({ response }, process.env.TOKEN_SECRETKEY || '');
             res.status(200).send({
                 status: true,
                 data: token

@@ -1,3 +1,5 @@
+'use strict';
+
 import { vehicleCreateService, vehicleFindByAllService, vehicleFindByIdService } from '../services/vehicle.service'
 import { Response, Request } from 'express'
 
@@ -8,8 +10,6 @@ import { Response, Request } from 'express'
  */
 const vehicleCreateController = async (req: Request, res: Response) => {
     const { body } = req;
-    console.log(body);
-    
     const response = await vehicleCreateService(body);
     if(response !== null) {
         res.send({ data: response, status: true, message: 'Vehiculo creado correctamente' })

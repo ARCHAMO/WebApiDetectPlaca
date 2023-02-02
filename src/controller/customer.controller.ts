@@ -1,3 +1,5 @@
+'use strict';
+
 import { customerCreateService, customerFindByAllService, customerFindByIdService } from '../services/customer.service'
 import { Response, Request } from 'express'
 

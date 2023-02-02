@@ -1,3 +1,5 @@
+'use strict';
+
 import PlateRecognizerModel from '../model/plateRecognizer.schema';
 import { IPlateRecognizer } from '../interface/platerecognizer.interface';
 import { faker } from '@faker-js/faker/locale/es_MX';
@@ -12,7 +14,7 @@ import { exec } from 'child_process';
  */
 const plateCreateService = async (plate: IPlateRecognizer) => {
     const response = await PlateRecognizerModel.create(plate);
-    await sendVehicles(response.results);
+    await sendVehicles(response.results, response._id, plate.datePlateImage);
     return response;
 }
 
@@ -40,7 +42,7 @@ const plateFindByIdService = async (id: string) => {
  * 
  * @param results Guarda los resultados de las placas detectadas en la lextura de la imagen.
  */
-async function sendVehicles(results) {
+async function sendVehicles(results: any, _id: any, datePlateImage: Date) {
     for (let index = 0; index < results.length; index++) {
         const element = results[index];
         const typeInfraction = faker.helpers.arrayElement(['SOAT', 'TECNICOMECANICA']);
@@ -49,6 +51,8 @@ async function sendVehicles(results) {
             codeRegion: element.region.code,
             score: element.score,
             type: element.vehicle.type,
+            plateRecognizerId: _id,
+            datePlateImage,
             // TODO: Informacion faker esto debe definirse de donde se va a sacar
             fullName: faker.name.fullName(),
             identification: faker.datatype.uuid(),
@@ -60,7 +64,7 @@ async function sendVehicles(results) {
             soatExpirationDate: typeInfraction === 'SOAT' ? faker.date.past() : faker.date.future(),
             city: faker.address.country(),
             appearanceNumber: faker.random.numeric(25),
-            valueOfTheFine: Number(faker.random.numeric(8))
+            valueOfTheFine: Number(faker.random.numeric(8)),
         }
         const response = await vehicleCreateService(vehicle);
     }
@@ -70,9 +74,8 @@ async function sendVehicles(results) {
  * 
  */
 async function plateExecScriptPythonService() {
-    const execCommand = process.env.COMMAND_PYTHON_PLATE_SLOPE;
-    console.log(execCommand);
-    
+    const execCommand = process.env.COMMAND_PYTHON_PLATE_SLOPE || '';
+
     exec(execCommand, (err, stdout, stderr) => {
         if (err) {
             console.error(err);

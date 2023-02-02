@@ -1,3 +1,5 @@
+'use strict';
+
 import { Schema, model } from 'mongoose'
 
 const VehicleSchema = new Schema(
@@ -46,7 +48,15 @@ const VehicleSchema = new Schema(
         },
         valueOfTheFine: {
             type: Number
-        }
+        },
+        datePlateImage: {
+            type: Date
+        },
+        plateRecognizerId: {
+            type: Schema.Types.ObjectId,
+            ref: 'PlateRecognizers',
+            required: true
+        },
     },
     {
         timestamps: true

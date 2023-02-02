@@ -1,4 +1,6 @@
-import { Schema, model } from 'mongoose'
+'use strict';
+
+import mongoose, { Schema, model } from 'mongoose'
 
 const PlateRecognizerSchema = new Schema(
     {
@@ -19,11 +21,14 @@ const PlateRecognizerSchema = new Schema(
         camera_id: {
             type: "Mixed"
         },
-        timestamp: {
-            type: Date
-        },
         fileNameClient: {
             type: String
+        },
+        datePlateImage: {
+            type: Date
+        },
+        timestamp: {
+            type: Date
         },
     },
     {

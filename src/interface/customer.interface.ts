@@ -1,3 +1,5 @@
+'use strict';
+
 export interface ICustomer {
     firstName: String,
     secondName: String,

@@ -1,3 +1,5 @@
+'use strict';
+
 import { Router } from "express";
 import { userCreateController, userFindByAllController, userFindByIdController, userLoginController } from "../controller/user.controller";
 

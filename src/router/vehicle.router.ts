@@ -1,3 +1,5 @@
+'use strict';
+
 import { Router } from "express";
 import { vehicleCreateController, vehicleFindByAllController, vehicleFindByIdController } from "../controller/vehicle.controller";
 
