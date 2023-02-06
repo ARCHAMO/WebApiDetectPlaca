@@ -28,7 +28,7 @@ const totalInfractionVehicleService = async (params: IObjParam) => {
             }
         }
     ]);
-    return response[0].total;
+    return response.length !== 0 ? response[0].total : 0;
 }
 
 const totalReadingsForMonthService = async (params: IObjParam) => {

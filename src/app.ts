@@ -14,7 +14,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 9999;
 
 app.use('/api', plateRecognizerRoute);
 app.use('/api', vehicleRoute);
