@@ -9,5 +9,7 @@ route.post('/plateRecognizer', plateCreateController)
 route.get('/plateRecognizers', plateFindByAllController)
 route.get('/plateRecognizer/:id', plateFindByIdController)
 route.post('/plateRecognizerExecSlope', plateExecScriptPythonController)
+route.post('/plateRecognizer/upload/:id', UserController.uploadImagen);
+route.get('/plateRecognizer/getImage/:imageFile', UserController.getImagen);
 
 export default route

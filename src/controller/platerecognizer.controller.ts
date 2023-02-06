@@ -58,4 +58,15 @@ const plateExecScriptPythonController = async (req: Request, res: Response) => {
     res.send({ data: response, status: true, message: '' })
 }
 
-export { plateCreateController, plateFindByIdController, plateFindByAllController, plateExecScriptPythonController }
+
+const plateUploadImageController = async (req: Request, res: Response) => {
+    const response = await plateExecScriptPythonService();
+    res.send({ data: response, status: true, message: '' })
+}
+
+const plateGetImageController = async (req: Request, res: Response) => {
+    const response = await plateExecScriptPythonService();
+    res.send({ data: response, status: true, message: '' })
+}
+
+export { plateCreateController, plateFindByIdController, plateFindByAllController, plateExecScriptPythonController, plateUploadImageController, plateGetImageController }

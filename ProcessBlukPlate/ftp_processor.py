@@ -148,6 +148,15 @@ def process_files(ftp_client, ftp_files, args):
             send_data(dataStr, ftp_file)
             move_file(ftp_client, ftp_file)
 
+            # Enviamos la imagen por webapi
+            files = {'file': (ftp_file, open(ftp_file, 'rb'))}
+            response = requests.post('http://localhost:9999/api/plateRecognizer/upload', files=files)
+            # Verifica que la solicitud haya sido exitosa
+            if response.status_code == 200:
+                print('Imagen subida correctamente')
+            else:
+                print("Error al subir la imagen")
+
         if track_processed(args):
             processed.append(ftp_file)
 
@@ -258,7 +267,7 @@ def send_data(args, fileName):
     }
     # print(args)
     
-    response = requests.post("http://localhost:3001/api/plateRecognizer", json=data)
+    response = requests.post("http://localhost:9999/api/plateRecognizer", json=data)
 
     # Verifica que la solicitud haya sido exitosa
     if response.status_code == 200:
